@@ -1,30 +1,44 @@
 <div align="center">
 
-# 💳 Credit Card Fraud Detection — Data Science & Visualization
+# 💳 Credit Card Fraud Detection
+### Data Science & Visualization · Team 1 · 24ADI204
 
-### Team 1 · 24ADI204 · Data Science & Visualization Lab
+**An end-to-end exploratory data analysis pipeline on 1.29M+ real-world credit card transactions — from raw data to cleaned, outlier-handled, and richly visualized fraud insights.**
 
-An end-to-end exploratory data analysis project on the [Kaggle Credit Card Transactions Fraud Detection dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) — from raw data to cleaned, outlier-handled, and visualized insights.
+![Status](https://img.shields.io/badge/status-active-brightgreen?style=flat-square)
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white&style=flat-square)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white&style=flat-square)
+![Pandas](https://img.shields.io/badge/Pandas-EDA-150458?logo=pandas&logoColor=white&style=flat-square)
+![Rows](https://img.shields.io/badge/records-1.29M-informational?style=flat-square)
+![Weeks](https://img.shields.io/badge/lab%20weeks-4-orange?style=flat-square)
+![License](https://img.shields.io/badge/license-Academic-lightgrey?style=flat-square)
 
-![Status](https://img.shields.io/badge/status-active-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-EDA-150458?logo=pandas&logoColor=white)
-![License](https://img.shields.io/badge/license-Academic-lightgrey)
-
-[Dataset](#-dataset) • [Project Timeline](#-project-timeline-week-by-week) • [Repo Structure](#-repository-structure) • [How to Run](#-how-to-run) • [Key Findings](#-key-eda-findings) • [Team](#-team)
+**[📖 About](#-about) · [🎯 Objectives](#-objectives) · [🗂 Dataset](#-dataset) · [🗓 Timeline](#-project-timeline-week-by-week) · [📁 Structure](#-repository-structure) · [🚀 Run](#-how-to-run) · [🔎 Findings](#-key-findings) · [❓ FAQ](#-faq) · [👥 Team](#-team)**
 
 </div>
 
----
+<br>
 
 ## 📖 About
 
-This repository documents a **four-week lab progression** for the Credit Card Fraud Detection project, built as part of the Data Science & Visualization course. Each week builds on the last — starting from raw data understanding, moving through cleaning and outlier handling, and finishing with univariate, bivariate, and multivariate exploratory data analysis (EDA).
+This repository documents a **four-week lab progression** building a complete exploratory data analysis (EDA) workflow for credit card fraud detection, developed for the Data Science & Visualization (24ADI204) course.
 
-> **Target variable:** `is_fraud` — a highly imbalanced binary classification target, which shapes much of the analysis approach throughout this project.
+Starting from a raw 1.29-million-row transaction dataset, the project moves through data understanding, cleaning, outlier handling, and finally deep univariate, bivariate, and multivariate analysis — surfacing the temporal, geographic, and behavioral patterns that separate fraudulent transactions from legitimate ones.
 
----
+> 🎯 **Target variable:** `is_fraud` — a **severely imbalanced** binary target (fraud makes up only ~0.58% of all transactions), which shapes the entire analytical and future modeling approach.
+
+<br>
+
+## 🎯 Objectives
+
+- 🔍 Understand the structure, quality, and distribution of a large real-world transaction dataset
+- 🧹 Detect and treat outliers and inconsistencies using statistically grounded methods (IQR)
+- 📊 Characterize each feature individually before exploring relationships between them
+- 🔗 Uncover temporal, geographic, and categorical patterns associated with fraud
+- 📐 Quantify class imbalance and its implications for downstream fraud-classification models
+- 📝 Produce a clear, reproducible, and well-documented analysis trail across all four weeks
+
+<br>
 
 ## 🗂 Dataset
 
@@ -32,9 +46,23 @@ This repository documents a **four-week lab progression** for the Credit Card Fr
 |---|---|
 | **Source** | [Kaggle — Credit Card Transactions Fraud Detection Dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) by `kartik2112` |
 | **Files used** | `fraudTrain.csv`, `fraudTest.csv` |
-| **Target variable** | `is_fraud` |
+| **Size** | **1,296,675 rows × 23 columns** (training set) |
+| **Target variable** | `is_fraud` (binary: 0 = legitimate, 1 = fraud) |
 | **Key numerical features** | `amt`, `city_pop`, `lat`, `long`, `merch_lat`, `merch_long` |
 | **Key categorical features** | `category`, `gender`, `state`, `job` |
+| **Other fields** | transaction timestamp, merchant, customer name, address, date of birth, transaction number |
+
+### 📊 Dataset snapshot
+
+| Check | Result |
+|---|---|
+| Missing values | ✅ None found |
+| Duplicate rows | ✅ None found |
+| Legitimate transactions | 1,289,169 (**99.42%**) |
+| Fraudulent transactions | 7,506 (**0.58%**) |
+| `amt` range | \$1.00 – \$28,948.90 (mean ≈ \$70.35, median = \$47.52) |
+| `amt` distribution | Strongly right-skewed (skewness ≈ 42.3) |
+| `city_pop` distribution | Strongly right-skewed (skewness ≈ 5.6) |
 
 <details>
 <summary>⚠️ <b>Note on dataset files in this repo</b></summary>
@@ -44,108 +72,64 @@ The CSVs in <code>archive (2)/</code> and <code>Week 3/fraudTrain_cleaned.csv</c
 
 </details>
 
----
+<br>
 
 ## 🗓 Project Timeline (Week-by-Week)
 
-```mermaid
-graph LR
-    A["📊 Week 1
-    Proposal & Report"] --> B["🔍 Week 2
-    Basic Data Analysis"]
-    B --> C["🧹 Week 3
-    Cleaning & Outliers"]
-    C --> D["📈 Week 4
-    EDA · Univariate,
-    Bivariate & Multivariate"]
+**📊 Week 1: Proposal & Report**  ➡️  **🔍 Week 2: Basic Data Analysis**  ➡️  **🧹 Week 3: Cleaning & Outliers**  ➡️  **📈 Week 4: Full EDA**
 
-    style A fill:#4C6EF5,color:#fff
-    style B fill:#12B886,color:#fff
-    style C fill:#F59F00,color:#fff
-    style D fill:#E64980,color:#fff
-```
+| Week | Focus | Deliverables |
+|:---:|---|---|
+| 1️⃣ | Project proposal & problem framing | 📄 `DSV_Team1_Week1_Lab_Report_CreditCardFraudDetection.docx`<br>📊 `Credit_Card_Fraud_Detection.pptx` |
+| 2️⃣ | Dataset structure, statistical & target-variable analysis | 📓 `data_analysis.ipynb` |
+| 3️⃣ | Outlier detection (IQR method) & data cleaning / visualization | 📓 `Outlier_Analysis.ipynb`<br>📓 `week3 data_visualization.ipynb`<br>📝 `week3data cleaning report.odt`<br>🔗 `colab_link.md`<br>🧾 `fraudTrain_cleaned.csv` |
+| 4️⃣ | Full EDA — univariate, bivariate & multivariate analysis | 📓 `Fraud_Detection_EDA_Univariate_Analysis.ipynb`<br>📓 `Bivariate_Multivariate_EDA.ipynb`<br>📕 `Credit_Card_Fraud_EDA_Report.pdf` |
 
-<table>
-<tr>
-<th>Week</th><th>Focus</th><th>Deliverables</th>
-</tr>
-<tr>
-<td align="center">1️⃣</td>
-<td>Project proposal & problem framing</td>
-<td>
+<br>
 
-- 📄 `DSV_Team1_Week1_Lab_Report_CreditCardFraudDetection.docx`
-- 📊 `Credit_Card_Fraud_Detection.pptx`
+## 🧪 Methodology
 
-</td>
-</tr>
-<tr>
-<td align="center">2️⃣</td>
-<td>Dataset structure, statistical & target-variable analysis</td>
-<td>
+| Step | What happens |
+|---|---|
+| **1. Data Understanding** | Load, inspect dimensions, dtypes, and sample records across all supported environments (Kaggle / Colab / Jupyter / VS Code). |
+| **2. Data Quality Assessment** | Check for missing values, duplicate rows, constant columns, invalid numeric values, and negative amounts. |
+| **3. Outlier Handling** | Apply the **Interquartile Range (IQR)** method to flag and treat outliers in transaction amounts and other skewed numeric fields. |
+| **4. Univariate Analysis** | Examine each feature independently — distribution shape, skewness, and class-imbalance of `is_fraud`. |
+| **5. Bivariate & Multivariate Analysis** | Correlation matrices, violin/box plots of amount vs. fraud status, category × gender × fraud interactions, hour-of-day fraud-rate heatmaps, and a derived **customer–merchant distance** feature (Haversine formula) compared across fraud classes. |
+| **6. Synthesis** | Consolidate patterns into a final report connecting EDA insights to future feature-engineering and modeling decisions. |
 
-- 📓 `data_analysis.ipynb`
-
-</td>
-</tr>
-<tr>
-<td align="center">3️⃣</td>
-<td>Outlier detection (IQR method) & data cleaning / visualization</td>
-<td>
-
-- 📓 `Outlier_Analysis.ipynb`
-- 📓 `week3 data_visualization.ipynb`
-- 📝 `week3data cleaning report.odt`
-- 🔗 `colab_link.md`
-- 🧾 `fraudTrain_cleaned.csv`
-
-</td>
-</tr>
-<tr>
-<td align="center">4️⃣</td>
-<td>Full EDA — univariate, bivariate & multivariate analysis</td>
-<td>
-
-- 📓 `Fraud_Detection_EDA_Univariate_Analysis.ipynb`
-- 📓 `Bivariate_Multivariate_EDA.ipynb`
-- 📕 `Credit_Card_Fraud_EDA_Report.pdf`
-
-</td>
-</tr>
-</table>
-
----
+<br>
 
 ## 📁 Repository Structure
 
 ```
 24ADI204_DSV_Team1/
 │
-├── Week 1/
+├── Week 1/                                          🗂 Proposal
 │   ├── Credit_Card_Fraud_Detection.pptx
 │   └── DSV_Team1_Week1_Lab_Report_CreditCardFraudDetection.docx
 │
-├── Week 2/
+├── Week 2/                                          🔍 Basic Analysis
 │   └── data_analysis.ipynb
 │
-├── Week 3/
+├── Week 3/                                          🧹 Cleaning & Outliers
 │   ├── Outlier_Analysis.ipynb
 │   ├── week3 data_visualization.ipynb
 │   ├── week3data cleaning report.odt
 │   ├── colab_link.md
-│   └── fraudTrain_cleaned.csv          (Git LFS)
+│   └── fraudTrain_cleaned.csv                       (Git LFS)
 │
-├── Week 4/
+├── Week 4/                                          📈 Full EDA
 │   ├── Fraud_Detection_EDA_Univariate_Analysis.ipynb
 │   ├── Bivariate_Multivariate_EDA.ipynb
 │   └── Credit_Card_Fraud_EDA_Report.pdf
 │
-└── archive (2)/
-    ├── fraudTrain.csv                  (Git LFS)
-    └── fraudTest.csv                   (Git LFS)
+└── archive (2)/                                     📦 Raw dataset
+    ├── fraudTrain.csv                                (Git LFS)
+    └── fraudTest.csv                                 (Git LFS)
 ```
 
----
+<br>
 
 ## 🚀 How to Run
 
@@ -171,33 +155,42 @@ cd 24ADI204_DSV_Team1
 # 2. Pull the large dataset files (Git LFS)
 git lfs pull
 
-# 3. Install common dependencies
+# 3. Install dependencies
 pip install pandas numpy matplotlib seaborn jupyter
 
 # 4. Launch Jupyter and open any notebook
 jupyter notebook
 ```
 
-Notebooks are written to auto-detect the dataset path across **Kaggle, Colab, Jupyter, and VS Code** environments, so they should run with minimal path changes.
+Notebooks auto-detect the dataset path across **Kaggle, Colab, Jupyter, and VS Code** environments, so they run with minimal path changes.
 
 </details>
 
----
+<details>
+<summary><b>Option C — Kaggle Notebook</b></summary>
+<br>
 
-## 🔎 Key EDA Findings
+Attach the [original Kaggle dataset](https://www.kaggle.com/datasets/kartik2112/fraud-detection) to a new Kaggle notebook and upload any `.ipynb` file from this repo — the loader cells will detect the Kaggle input path automatically.
 
-The analysis pipeline across notebooks covers:
+</details>
 
-- ✅ **Dataset understanding** — dimensions, column types, sample records
-- ✅ **Data quality checks** — missing values, duplicates, constant columns, invalid/negative amounts
-- ✅ **Outlier handling** — IQR-based detection on transaction amounts
-- ✅ **Class-imbalance analysis** — `is_fraud` distribution (counts & percentages)
-- ✅ **Univariate analysis** — individual feature distributions
-- ✅ **Bivariate & multivariate analysis** — relationships between features and fraud likelihood
+<br>
+
+## 🔎 Key Findings
+
+| | Category | Insight |
+|:---:|---|---|
+| 📦 | **Data Quality** | No missing values and no duplicate rows across all 1,296,675 records — the dataset required no imputation. |
+| ⚖️ | **Class Imbalance** | Fraud accounts for only **0.58%** of transactions. Accuracy alone would be a weak evaluation metric — precision, recall, F1, and PR-AUC are needed for any future model. |
+| 💰 | **Transaction Amount** | Right-skewed distribution (skewness ≈ 42.3); legitimate vs. fraudulent amount distributions differ in shape and spread. |
+| 🕒 | **Temporal Patterns** | Fraud rate varies measurably by hour of day, day of week, and month — extracted via feature engineering on the transaction timestamp. |
+| 🗺️ | **Geographic Patterns** | A derived customer–merchant distance (Haversine formula) shows different spread between legitimate and fraudulent transactions. |
+| 🏷️ | **Category & Demographics** | Fraud rate varies across transaction category, and further across category × gender combinations. |
+| 📈 | **Outliers** | IQR-based detection flags roughly 67K potential outliers in `amt` and 243K in `city_pop`, both consistent with their right-skewed nature. |
 
 📕 Full write-up available in [`Week 4/Credit_Card_Fraud_EDA_Report.pdf`](./Week%204/Credit_Card_Fraud_EDA_Report.pdf)
 
----
+<br>
 
 ## 🛠 Tech Stack
 
@@ -213,7 +206,62 @@ The analysis pipeline across notebooks covers:
 
 </div>
 
----
+<br>
+
+## 🧭 Roadmap
+
+- [x] Data understanding & structure analysis
+- [x] Data quality assessment (missing values, duplicates)
+- [x] Outlier detection & treatment (IQR)
+- [x] Univariate analysis of all key features
+- [x] Bivariate & multivariate analysis
+- [x] Temporal & geographic pattern analysis
+- [ ] Feature engineering for modeling
+- [ ] Baseline fraud-classification model (e.g., Logistic Regression / Tree-based)
+- [ ] Model evaluation with precision, recall, F1, and PR-AUC
+
+<br>
+
+## ❓ FAQ
+
+<details>
+<summary><b>Why is accuracy not used as the main metric?</b></summary>
+<br>
+Because fraud makes up only 0.58% of the data, a model that predicts "not fraud" every single time would still be ~99.4% accurate — while catching zero fraud. Precision, recall, F1-score, and PR-AUC are far more informative for this kind of imbalanced problem.
+</details>
+
+<details>
+<summary><b>Why IQR for outlier detection instead of Z-score?</b></summary>
+<br>
+Several numeric features (like <code>amt</code> and <code>city_pop</code>) are strongly right-skewed, so the IQR (1.5× rule) is more robust here than a Z-score approach, which assumes a roughly normal distribution.
+</details>
+
+<details>
+<summary><b>Where can I find the raw dataset if the CSVs don't download?</b></summary>
+<br>
+Grab it directly from Kaggle: <a href="https://www.kaggle.com/datasets/kartik2112/fraud-detection">Credit Card Transactions Fraud Detection Dataset</a>, and make sure Git LFS is installed for the copies tracked in this repo.
+</details>
+
+<br>
+
+## 🤝 Contributing
+
+This is an academic lab repository for Team 1 (24ADI204). Team members can contribute via pull requests following this pattern:
+
+```bash
+git checkout -b week-x/your-feature
+# make your changes
+git commit -m "Week X: describe your change"
+git push origin week-x/your-feature
+```
+
+<br>
+
+## 📄 License
+
+This project is submitted as coursework for the **24ADI204 — Data Science & Visualization** lab and is intended for academic/educational use.
+
+<br>
 
 ## 👥 Team
 
@@ -221,17 +269,21 @@ The analysis pipeline across notebooks covers:
 
 | Member | Notes |
 |---|---|
-| Sudarshini 25BAD116 | Repository owner |
-| Suhani Parveen 25BAD119 | Contributor |
+| Sudarshini B 25BAD116 | Repository owner |
+| Suhani 25BAD119 | Contributor |
 | Shreya 25BAD105 | Contributor |
 | Thanesha V 25BAD125 | Contributor |
 
 
 
+<br>
+
 ---
 
 <div align="center">
 
-*Built for the 24ADI204 Data Science & Visualization Lab*
+*Built with 📊 and ☕ for the 24ADI204 Data Science & Visualization Lab*
+
+**[⬆ Back to top](#-credit-card-fraud-detection)**
 
 </div>
