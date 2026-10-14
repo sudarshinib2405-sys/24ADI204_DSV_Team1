@@ -10,7 +10,7 @@
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white&style=flat-square)
 ![Pandas](https://img.shields.io/badge/Pandas-EDA-150458?logo=pandas&logoColor=white&style=flat-square)
 ![Rows](https://img.shields.io/badge/records-1.29M-informational?style=flat-square)
-![Weeks](https://img.shields.io/badge/lab%20weeks-4-orange?style=flat-square)
+![Weeks](https://img.shields.io/badge/lab%20weeks-7-orange?style=flat-square)
 ![License](https://img.shields.io/badge/license-Academic-lightgrey?style=flat-square)
 
 **[📖 About](#-about) · [🎯 Objectives](#-objectives) · [🗂 Dataset](#-dataset) · [🗓 Timeline](#-project-timeline-week-by-week) · [📁 Structure](#-repository-structure) · [🚀 Run](#-how-to-run) · [🔎 Findings](#-key-findings) · [❓ FAQ](#-faq) · [👥 Team](#-team)**
@@ -21,7 +21,7 @@
 
 ## 📖 About
 
-This repository documents a **four-week lab progression** building a complete exploratory data analysis (EDA) workflow for credit card fraud detection, developed for the Data Science & Visualization (24ADI204) course.
+This repository documents a **seven-week lab progression** building a complete exploratory data analysis (EDA), feature engineering, and dimensionality reduction workflow for credit card fraud detection, developed for the Data Science & Visualization (24ADI204) course.
 
 Starting from a raw 1.29-million-row transaction dataset, the project moves through data understanding, cleaning, outlier handling, and finally deep univariate, bivariate, and multivariate analysis — surfacing the temporal, geographic, and behavioral patterns that separate fraudulent transactions from legitimate ones.
 
@@ -76,7 +76,7 @@ The CSVs in <code>archive (2)/</code> and <code>Week 3/fraudTrain_cleaned.csv</c
 
 ## 🗓 Project Timeline (Week-by-Week)
 
-**📊 Week 1: Proposal & Report**  ➡️  **🔍 Week 2: Basic Data Analysis**  ➡️  **🧹 Week 3: Cleaning & Outliers**  ➡️  **📈 Week 4: Full EDA**
+**📊 Week 1: Proposal & Report**  ➡️  **🔍 Week 2: Basic Data Analysis**  ➡️  **🧹 Week 3: Cleaning & Outliers**  ➡️  **📈 Week 4: Full EDA**  ➡️  **⚖️ Week 6: Feature Engineering**  ➡️  **🎯 Week 7: PCA & Feature Selection**
 
 | Week | Focus | Deliverables |
 |:---:|---|---|
@@ -84,6 +84,8 @@ The CSVs in <code>archive (2)/</code> and <code>Week 3/fraudTrain_cleaned.csv</c
 | 2️⃣ | Dataset structure, statistical & target-variable analysis | 📓 `data_analysis.ipynb` |
 | 3️⃣ | Outlier detection (IQR method) & data cleaning / visualization | 📓 `Outlier_Analysis.ipynb`<br>📓 `week3 data_visualization.ipynb`<br>📝 `week3data cleaning report.odt`<br>🔗 `colab_link.md`<br>🧾 `fraudTrain_cleaned.csv` |
 | 4️⃣ | Full EDA — univariate, bivariate & multivariate analysis | 📓 `Fraud_Detection_EDA_Univariate_Analysis.ipynb`<br>📓 `Bivariate_Multivariate_EDA.ipynb`<br>📕 `Credit_Card_Fraud_EDA_Report.pdf` |
+| 6️⃣ | Feature engineering — categorical encoding, skewness fix & scaling | 📓 `Week 6/01_encoding_categorical_variables.ipynb`<br>📓 `Week 6/02_normalization_scaling_fixing_skewness.ipynb` |
+| 7️⃣ | Dimensionality reduction — ANOVA F-statistic ranking & PCA | 📓 `Week 7/03_feature_selection_and_variance.ipynb`<br>📓 `Week 7/04_pca_and_variance_visualization.ipynb` |
 
 <br>
 
@@ -96,7 +98,8 @@ The CSVs in <code>archive (2)/</code> and <code>Week 3/fraudTrain_cleaned.csv</c
 | **3. Outlier Handling** | Apply the **Interquartile Range (IQR)** method to flag and treat outliers in transaction amounts and other skewed numeric fields. |
 | **4. Univariate Analysis** | Examine each feature independently — distribution shape, skewness, and class-imbalance of `is_fraud`. |
 | **5. Bivariate & Multivariate Analysis** | Correlation matrices, violin/box plots of amount vs. fraud status, category × gender × fraud interactions, hour-of-day fraud-rate heatmaps, and a derived **customer–merchant distance** feature (Haversine formula) compared across fraud classes. |
-| **6. Synthesis** | Consolidate patterns into a final report connecting EDA insights to future feature-engineering and modeling decisions. |
+| **6. Feature Engineering (Week 6)** | Binary and label encoding, frequency encoding for high-cardinality `job` (478 titles) and `state`, log transformation fixing `amt` skewness (+26.58 to -0.28), and feature scaling via `StandardScaler`. |
+| **7. Dimensionality Reduction (Week 7)** | Variance thresholding, ANOVA F-statistic ranking (`log_amt` F=3163, `is_night` F=2777), and Principal Component Analysis (PCA) retaining 89.5% variance in 6 components. |
 
 <br>
 
@@ -123,6 +126,14 @@ The CSVs in <code>archive (2)/</code> and <code>Week 3/fraudTrain_cleaned.csv</c
 │   ├── Fraud_Detection_EDA_Univariate_Analysis.ipynb
 │   ├── Bivariate_Multivariate_EDA.ipynb
 │   └── Credit_Card_Fraud_EDA_Report.pdf
+│
+├── Week 6/                                          ⚖️ Feature Engineering
+│   ├── 01_encoding_categorical_variables.ipynb      (Binary, Label & Frequency Encoding)
+│   └── 02_normalization_scaling_fixing_skewness.ipynb (Log1p Skewness Fix & StandardScaler)
+│
+├── Week 7/                                          🎯 Dimensionality Reduction & PCA
+│   ├── 03_feature_selection_and_variance.ipynb       (VarianceThreshold & ANOVA F-Score)
+│   └── 04_pca_and_variance_visualization.ipynb       (PCA Scree Plot & 2D Projection)
 │
 └── archive (2)/                                     📦 Raw dataset
     ├── fraudTrain.csv                                (Git LFS)
@@ -187,6 +198,8 @@ Attach the [original Kaggle dataset](https://www.kaggle.com/datasets/kartik2112/
 | 🗺️ | **Geographic Patterns** | A derived customer–merchant distance (Haversine formula) shows different spread between legitimate and fraudulent transactions. |
 | 🏷️ | **Category & Demographics** | Fraud rate varies across transaction category, and further across category × gender combinations. |
 | 📈 | **Outliers** | IQR-based detection flags roughly 67K potential outliers in `amt` and 243K in `city_pop`, both consistent with their right-skewed nature. |
+| 🛠️ | **Week 6: Feature Engineering** | Log1p transformation compressed `amt` skewness from **+26.58 to -0.28** (normal bell curve). Frequency encoding on 478 job titles prevented high-dimensional sparsity. |
+| 🎯 | **Week 7: Dimensionality Reduction** | ANOVA F-ranking identified `log_amt` ($F=3163$) and `is_night` ($F=2777$) as highest impact signals. PCA Scree analysis proved **6 components retain 89.49% of variance**. |
 
 📕 Full write-up available in [`Week 4/Credit_Card_Fraud_EDA_Report.pdf`](./Week%204/Credit_Card_Fraud_EDA_Report.pdf)
 
@@ -199,6 +212,7 @@ Attach the [original Kaggle dataset](https://www.kaggle.com/datasets/kartik2112/
 ![Python](https://img.shields.io/badge/-Python-3776AB?logo=python&logoColor=white&style=for-the-badge)
 ![Pandas](https://img.shields.io/badge/-Pandas-150458?logo=pandas&logoColor=white&style=for-the-badge)
 ![NumPy](https://img.shields.io/badge/-NumPy-013243?logo=numpy&logoColor=white&style=for-the-badge)
+![Scikit-Learn](https://img.shields.io/badge/-Scikit--Learn-F7931E?logo=scikit-learn&logoColor=white&style=for-the-badge)
 ![Matplotlib](https://img.shields.io/badge/-Matplotlib-11557C?style=for-the-badge)
 ![Seaborn](https://img.shields.io/badge/-Seaborn-3776AB?style=for-the-badge)
 ![Jupyter](https://img.shields.io/badge/-Jupyter-F37626?logo=jupyter&logoColor=white&style=for-the-badge)
@@ -210,14 +224,14 @@ Attach the [original Kaggle dataset](https://www.kaggle.com/datasets/kartik2112/
 
 ## 🧭 Roadmap
 
-- [x] Data understanding & structure analysis
-- [x] Data quality assessment (missing values, duplicates)
-- [x] Outlier detection & treatment (IQR)
-- [x] Univariate analysis of all key features
-- [x] Bivariate & multivariate analysis
-- [x] Temporal & geographic pattern analysis
-- [ ] Feature engineering for modeling
-- [ ] Baseline fraud-classification model (e.g., Logistic Regression / Tree-based)
+- [x] Data understanding & structure analysis (Weeks 1–2)
+- [x] Data quality assessment (missing values, duplicates) (Week 3)
+- [x] Outlier detection & treatment (IQR vs Z-Score) (Week 3)
+- [x] Univariate, bivariate & multivariate analysis (Week 4)
+- [x] Temporal & geographic pattern analysis (Week 4)
+- [x] Feature engineering for modeling (Week 6: Encoding, Log Skewness Fix, Scaling)
+- [x] Dimensionality reduction & feature selection (Week 7: ANOVA F-ranking, PCA)
+- [ ] Baseline fraud-classification model (e.g., Logistic Regression / XGBoost)
 - [ ] Model evaluation with precision, recall, F1, and PR-AUC
 
 <br>
